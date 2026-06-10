@@ -1,0 +1,118 @@
+@import '../../styles/variables.scss';
+
+.order-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.order-detail__loading {
+  padding: 120px;
+  text-align: center;
+  color: $color-text-muted;
+}
+
+.order-detail__scroll {
+  flex: 1;
+  min-height: 0;
+  padding-bottom: 140px;
+}
+
+.order-detail__status-card {
+  background: linear-gradient(135deg, #7dd3fc 0%, #66ccff 100%);
+  padding: 48px $spacing-lg;
+  color: $color-white;
+}
+
+.order-detail__status {
+  display: block;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.order-detail__no {
+  font-size: 24px;
+  opacity: 0.9;
+}
+
+.order-detail__section {
+  background: $color-white;
+  margin: $spacing-md;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.order-detail__section-title {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: $spacing-md;
+}
+
+.order-detail__item {
+  display: flex;
+  margin-bottom: $spacing-md;
+}
+
+.order-detail__cover {
+  width: 120px;
+  height: 120px;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+}
+
+.order-detail__item-title {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.order-detail__item-sub {
+  display: block;
+  font-size: 22px;
+  color: $color-text-muted;
+  margin-bottom: 8px;
+}
+
+.order-detail__item-price {
+  font-size: 26px;
+  color: $color-coupon;
+}
+
+.order-detail__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26px;
+  color: $color-text-secondary;
+  margin-bottom: 12px;
+}
+
+.order-detail__row--strong {
+  color: $color-text;
+  font-weight: 600;
+}
+
+.order-detail__pay {
+  color: $color-coupon;
+  font-size: 32px;
+}
+
+.order-detail__footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $spacing-md;
+  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom));
+  background: $color-white;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.order-detail__refund-btn {
+  --nutui-button-default-color: #{$color-coupon};
+  --nutui-button-default-border-color: #{$color-coupon};
+}

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "growthBalance" DECIMAL(10,2) NOT NULL DEFAULT 0,
+ADD COLUMN     "isMember" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "lastSignInAt" TIMESTAMP(3);

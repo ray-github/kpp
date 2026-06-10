@@ -1,0 +1,203 @@
+@import './variables.scss';
+
+// ─── 通用二级页容器 ──────────────────────────────────────────
+.secondary-page {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $spacing-md;
+  box-sizing: border-box;
+}
+
+.secondary-page__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-md;
+}
+
+.secondary-page__link {
+  font-size: 13px;
+  color: $color-primary;
+  font-weight: 500;
+}
+
+.secondary-page__card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+}
+
+.secondary-page__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.secondary-page__title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-text;
+  margin-bottom: 4px;
+}
+
+.secondary-page__desc {
+  display: block;
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.secondary-page__meta {
+  display: block;
+  font-size: 11px;
+  color: $color-text-secondary;
+  margin-top: 4px;
+}
+
+.secondary-page__action {
+  font-size: 12px;
+  color: $color-danger;
+  flex-shrink: 0;
+  margin-left: $spacing-md;
+  font-weight: 500;
+}
+
+.secondary-page__tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: $radius-pill;
+  background: $color-primary-bg;
+  color: $color-primary;
+  margin-top: 4px;
+}
+
+.secondary-page__tag--muted {
+  background: $color-bg;
+  color: $color-text-muted;
+}
+
+// ─── 表单页 ──────────────────────────────────────────────────
+.form-page {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $spacing-md;
+  box-sizing: border-box;
+  padding-bottom: 90px;
+}
+
+.form-page__group {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+}
+
+.form-page__label {
+  display: block;
+  font-size: 13px;
+  color: $color-text-secondary;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-page__input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 $spacing-sm;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: $color-bg;
+  color: $color-text;
+}
+
+.form-page__textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: $spacing-sm;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: $color-bg;
+}
+
+.form-page__footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $spacing-sm $spacing-md;
+  padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+  background: $color-white;
+  box-shadow: 0 -2px 12px rgba(99, 102, 241, 0.1);
+}
+
+.form-page__switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $spacing-sm;
+}
+
+.form-page__switch-label {
+  font-size: 14px;
+  color: $color-text;
+}
+
+.list-page__fab {
+  position: fixed;
+  right: $spacing-md;
+  bottom: calc(60px + env(safe-area-inset-bottom));
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: $grad-brand;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-white;
+  font-size: 24px;
+  box-shadow: $shadow-float;
+}
+
+.support-page__card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+}
+
+.support-page__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-xs 0;
+  border-bottom: 1px solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.support-page__label {
+  font-size: 13px;
+  color: $color-text-secondary;
+}
+
+.support-page__value {
+  font-size: 14px;
+  color: $color-text;
+  font-weight: 600;
+}
+
+.support-page__copy {
+  font-size: 12px;
+  color: $color-primary;
+  margin-left: $spacing-xs;
+}

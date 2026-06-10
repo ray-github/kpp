@@ -1,0 +1,12 @@
+@import '../../styles/secondary-page.scss';
+
+.customer-service {
+  padding-bottom: $spacing-xl;
+}
+
+.customer-service__tip {
+  font-size: 24px;
+  color: $color-text-muted;
+  text-align: center;
+  margin-top: $spacing-lg;
+}

@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.coupons {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $spacing-md;
+}
+
+.coupons__item {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
+  border: 1px solid #ffccc7;
+  border-radius: $radius-lg;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-sm;
+}
+
+.coupons__item--used {
+  opacity: 0.5;
+}
+
+.coupons__amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: $color-coupon;
+  margin-right: $spacing-md;
+}
+
+.coupons__title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.coupons__desc {
+  font-size: 11px;
+  color: $color-text-muted;
+}

@@ -1,0 +1,36 @@
+---
+description: 小程序网络请求、环境变量与微信域名校验
+globs: apps/miniapp/**/*
+alwaysApply: false
+---
+
+# 网络与微信域名校验
+
+## 请求
+
+- 统一用 `Taro.request` 封装，禁止 `axios` / `fetch`（小程序无完整 fetch 实现）
+- API 基址读 `process.env.TARO_APP_API_BASE`，变量名必须以 `TARO_APP_` 开头
+- 401 时清 token 并 `reLaunch` 登录页，避免各页面重复处理
+
+## 微信后台配置
+
+- 正式环境：`request` / `uploadFile` / `downloadFile` 域名须在公众平台配置 HTTPS 白名单
+- 本地调试：微信开发者工具 → 详情 → 本地设置 → **不校验合法域名**（仅开发）
+- 真机预览 localhost 不可达：用局域网 IP 或内网穿透，并临时加入合法域名
+
+## 登录
+
+- `Taro.login` 拿 `code` 发后端换 JWT；`getPhoneNumber` 需企业主体，开发期可 mock
+- 敏感信息勿写进小程序包或 `TARO_APP_`  env（会被编译进客户端）
+
+## 反例
+
+```tsx
+// BAD
+import axios from 'axios'
+axios.get('http://localhost:3000/api')
+
+// GOOD
+import { request } from '@/services/request'
+request({ url: '/catalog/courses' })
+```

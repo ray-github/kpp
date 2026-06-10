@@ -1,0 +1,41 @@
+@import './styles/variables.scss';
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  font-size: 28px;
+  color: $color-text;
+  background-color: $color-bg;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, text, image {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  background-color: $color-bg;
+}
+
+.page--white {
+  background-color: $color-white;
+}
+
+// Gradient text utility
+.text-gradient {
+  background: $grad-brand;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+
+// Brand pill button
+.btn-brand {
+  background: $grad-brand;
+  color: $color-white;
+  border-radius: $radius-pill;
+  font-weight: 600;
+  border: none;
+}

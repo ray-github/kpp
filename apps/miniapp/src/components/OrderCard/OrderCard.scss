@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.order-card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.order-card__head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.order-card__no {
+  font-size: 22px;
+  color: $color-text-muted;
+}
+
+.order-card__status {
+  font-size: 24px;
+  color: $color-primary-dark;
+}
+
+.order-card__body {
+  display: flex;
+  align-items: center;
+}
+
+.order-card__cover {
+  width: 120px;
+  height: 120px;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+}
+
+.order-card__title {
+  display: block;
+  font-size: 28px;
+  color: $color-text;
+  margin-bottom: 12px;
+}
+
+.order-card__price {
+  font-size: 32px;
+  font-weight: 600;
+  color: $color-coupon;
+}

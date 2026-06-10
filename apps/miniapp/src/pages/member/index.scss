@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.member {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.member__hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 64px $spacing-lg;
+  color: $color-white;
+}
+
+.member__title {
+  display: block;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.member__status {
+  font-size: 26px;
+  opacity: 0.9;
+}
+
+.member__benefits {
+  margin: $spacing-md;
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.member__section-title {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: $spacing-md;
+}
+
+.member__benefit {
+  display: block;
+  font-size: 26px;
+  color: $color-text-secondary;
+  margin-bottom: 12px;
+}
+
+.member__action {
+  padding: $spacing-lg;
+}

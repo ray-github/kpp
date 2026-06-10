@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 48px;
+  min-height: 50vh;
+}
+
+.empty-state__icon {
+  font-size: 100px;
+  margin-bottom: $spacing-lg;
+  opacity: 0.6;
+}
+
+.empty-state__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: $color-text-secondary;
+  margin-bottom: 12px;
+}
+
+.empty-state__subtitle {
+  font-size: 26px;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xl;
+  text-align: center;
+}
+
+.empty-state__btn {
+  background: $grad-brand;
+  border-radius: $radius-pill;
+  padding: 20px 80px;
+  box-shadow: $shadow-card;
+}
+
+.empty-state__btn-text {
+  color: $color-white;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.empty-state--compact {
+  padding: 48px 24px;
+  min-height: auto;
+}
+
+.empty-state--compact .empty-state__icon {
+  font-size: 48px;
+  margin-bottom: $spacing-sm;
+}
+
+.empty-state--compact .empty-state__title {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.empty-state--compact .empty-state__subtitle {
+  font-size: 12px;
+  margin-bottom: $spacing-md;
+}
+
+.empty-state--compact .empty-state__btn {
+  padding: 8px 28px;
+}
+
+.empty-state--compact .empty-state__btn-text {
+  font-size: 13px;
+}

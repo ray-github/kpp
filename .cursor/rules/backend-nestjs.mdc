@@ -1,0 +1,29 @@
+---
+description: NestJS + Prisma + PostgreSQL + Redis 后端规范
+globs: apps/api/**/*
+alwaysApply: false
+---
+
+# NestJS 后端规范
+
+## 配置
+
+- 敏感项只从 `process.env` 读取，经 `@nestjs/config` 加载根目录 `.env`
+- `DATABASE_URL` 指向本地 PostgreSQL；`REDIS_URL` 指向 Docker Redis（`localhost:6379`）
+- 密码含特殊字符时放在 `.env` 引号内，勿提交 git
+
+## 结构
+
+- 按域分模块：`auth` / `catalog` / `cart` / `order` / `enrollment`
+- DTO 用 `class-validator`；Controller 只做入参校验与调用 Service
+- Prisma 迁移：`npx prisma migrate dev`；生产用 `migrate deploy`
+
+## 微信对接
+
+- `code2Session` 仅在后端调用，AppSecret 不得出现在 miniapp 代码中
+- JWT 过期与 Redis 黑名单配合；热点读（banner、类目）加 Redis 缓存
+
+## Windows 开发
+
+- PostgreSQL 用本机服务；Redis 用 `docker compose up -d` 启动 `kpp-redis`
+- 首次建库：`CREATE DATABASE kpp;`（在 psql 或 pgAdmin 中执行）

@@ -1,0 +1,12 @@
+@import '../../styles/secondary-page.scss';
+
+.merchant-apply__status {
+  background: linear-gradient(135deg, #e0f4ff 0%, #ffffff 100%);
+  border: 2px solid $color-primary-light;
+}
+
+.merchant-apply__status-text {
+  font-size: 14px;
+  color: $color-primary-dark;
+  font-weight: 600;
+}

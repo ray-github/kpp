@@ -1,0 +1,413 @@
+@import '../../styles/variables.scss';
+
+// ─── Header ──────────────────────────────────────────────────
+.me__header {
+  background: $grad-brand;
+  padding: 0 $spacing-md $spacing-lg;
+  border-radius: 0 0 $radius-xl $radius-xl;
+}
+
+.me__status-bar {
+  height: 44px;
+}
+
+.me__profile {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.me__avatar {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.me__avatar-text {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: $color-white;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.me__avatar-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.me__user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.me__username {
+  font-size: 17px;
+  font-weight: 700;
+  color: $color-white;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.me__phone {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.me__settings-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.me__settings-icon {
+  font-size: 18px;
+}
+
+// ─── Assets Card ─────────────────────────────────────────────
+.me__assets-card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  margin: -$spacing-md $spacing-md $spacing-sm;
+  padding: $spacing-sm 0;
+  box-shadow: $shadow-float;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.me__asset {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: $spacing-xs 0;
+}
+
+.me__asset-value {
+  font-size: 20px;
+  font-weight: 800;
+  background: $grad-brand;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+
+.me__asset-label {
+  font-size: 11px;
+  color: $color-text-muted;
+  margin-top: 2px;
+}
+
+.me__asset-divider {
+  width: 1px;
+  height: 22px;
+  background: $color-border;
+}
+
+.me__asset-tag {
+  position: absolute;
+  top: -4px;
+  right: 6px;
+  border-radius: $radius-pill;
+  padding: 1px 6px;
+}
+
+.me__asset-tag--gold {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.me__asset-tag--red {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.me__asset-tag-text {
+  font-size: 10px;
+  color: $color-gold;
+}
+
+.me__asset-tag--red .me__asset-tag-text {
+  color: $color-danger;
+}
+
+// ─── Cards ───────────────────────────────────────────────────
+.me__cards {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin: 0 $spacing-md $spacing-sm;
+}
+
+.me__card--vip {
+  background: $grad-dark;
+  border-radius: $radius-lg;
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: $shadow-card;
+}
+
+.me__card-vip-left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.me__card-vip-crown {
+  font-size: 22px;
+}
+
+.me__card-vip-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-gold;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.me__card-vip-tags {
+  display: flex;
+  gap: 4px;
+}
+
+.me__card-vip-tag {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2px 6px;
+  border-radius: $radius-pill;
+}
+
+.me__card-vip-arrow {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.me__card--growth {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: $shadow-card;
+  border: 1px solid $color-border;
+}
+
+.me__card-growth-left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.me__card-growth-icon {
+  font-size: 22px;
+}
+
+.me__card-growth-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-text;
+  display: block;
+}
+
+.me__card-growth-balance {
+  font-size: 17px;
+  font-weight: 800;
+  background: $grad-brand;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+
+.me__card-growth-btn {
+  background: $grad-brand;
+  border-radius: $radius-pill;
+  padding: 7px 18px;
+}
+
+.me__card-growth-btn-text {
+  font-size: 12px;
+  color: $color-white;
+  font-weight: 700;
+}
+
+// ─── Section card wrapper ────────────────────────────────────
+.me__section {
+  background: $color-white;
+  margin: 0 $spacing-md $spacing-xs;
+  border-radius: $radius-lg;
+  padding: $spacing-sm $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.me__section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.me__section-head-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.me__section-dot {
+  width: 3px;
+  height: 14px;
+  border-radius: $radius-pill;
+  background: $grad-brand;
+}
+
+.me__section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.me__section-link {
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+// ─── Quick links ─────────────────────────────────────────────
+.me__quick {
+  display: flex;
+  justify-content: space-around;
+}
+
+.me__quick-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.me__quick-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $grad-brand-soft;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.me__quick-icon {
+  font-size: 20px;
+}
+
+.me__quick-label {
+  font-size: 11px;
+  color: $color-text-secondary;
+  font-weight: 500;
+}
+
+// ─── Order tabs ──────────────────────────────────────────────
+.me__order-tabs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.me__order-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 4px;
+}
+
+.me__order-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.me__order-icon {
+  font-size: 18px;
+}
+
+.me__order-label {
+  font-size: 11px;
+  color: $color-text-secondary;
+}
+
+.me__order-badge {
+  position: absolute;
+  top: -4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: $radius-pill;
+  background: $color-danger;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.me__order-badge-text {
+  font-size: 10px;
+  color: $color-white;
+  font-weight: 700;
+}
+
+// ─── Service grid ────────────────────────────────────────────
+.me__service-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.me__service-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: $spacing-sm;
+}
+
+.me__service-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.me__service-icon {
+  font-size: 18px;
+}
+
+.me__service-label {
+  font-size: 11px;
+  color: $color-text-secondary;
+  text-align: center;
+}
+
+.me__bottom-space {
+  height: 80px;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "prj-mp-kpp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "课补补类微信小程序 monorepo",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:weapp": "npm run dev:weapp --workspace=apps/miniapp",
+    "build:weapp": "npm run build:weapp --workspace=apps/miniapp",
+    "dev:api": "npm run start:dev --workspace=apps/api",
+    "build:api": "npm run build --workspace=apps/api",
+    "prisma:generate": "npm run prisma:generate --workspace=apps/api",
+    "prisma:migrate": "npm run prisma:migrate --workspace=apps/api",
+    "prisma:deploy": "npm run prisma:deploy --workspace=apps/api",
+    "prisma:seed": "npm run prisma:seed --workspace=apps/api",
+    "start:api:prod": "npm run build:api && pm2 start ecosystem.config.cjs --update-env",
+    "pm2:restart": "pm2 restart kpp-api"
+  }
+}

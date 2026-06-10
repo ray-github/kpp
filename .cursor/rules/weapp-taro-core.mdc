@@ -1,0 +1,35 @@
+---
+description: Taro 微信小程序核心约束 — 组件、生命周期、样式单位
+globs: apps/miniapp/**/*
+alwaysApply: false
+---
+
+# Taro 微信小程序核心约束
+
+## 组件与标签
+
+- 使用 `@tarojs/components` 的 `View` / `Text` / `Image` / `ScrollView`，禁止 `div` / `span` / `img`
+- 页面数据刷新用 `useDidShow` / `useDidHide`，不要仅靠 `useEffect([])`（从二级页返回时不会重新执行）
+- 列表必须加稳定 `key`；长列表用分页，避免一次渲染数百节点
+
+## 样式
+
+- 布局尺寸优先 `rpx`；设计稿宽度在 `config/index` 设 `designWidth: 375`
+- 避免 `*` 选择器、`:hover`、复杂后代选择器（WXSS 支持有限）
+- `ScrollView` 必须设明确高度（如 `height: 100vh` 或 flex 子项 `flex:1; min-height:0`）
+- `position: fixed` 与原生组件（`map` / `video` / `canvas`）叠层时用 `cover-view` / `cover-image`
+
+## 包体积
+
+- 编译目标固定 `weapp`；主包控制在 2MB 内，二级页用 **分包** `subPackages`
+- 禁止引入依赖 `window` / `document` / `localStorage` 的 npm 包；存储用 `Taro.setStorage`
+
+## 反例
+
+```tsx
+// BAD — 浏览器 API
+useEffect(() => { localStorage.setItem('x', '1') }, [])
+
+// GOOD
+useDidShow(() => { Taro.getStorage({ key: 'x' }) })
+```

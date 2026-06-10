@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+
+.growth-card {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $spacing-md;
+}
+
+.growth-card__balance-card {
+  background: linear-gradient(135deg, #66ccff 0%, #38bdf8 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  color: $color-white;
+  margin-bottom: $spacing-lg;
+}
+
+.growth-card__label {
+  display: block;
+  font-size: 24px;
+  opacity: 0.9;
+}
+
+.growth-card__balance {
+  display: block;
+  font-size: 56px;
+  font-weight: 700;
+  margin: 12px 0;
+}
+
+.growth-card__tip {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.growth-card__section-title {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: $spacing-md;
+}
+
+.growth-card__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.growth-card__amount {
+  width: calc(50% - 8px);
+  background: $color-white;
+  border-radius: $radius-md;
+  padding: 28px 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  box-shadow: $shadow-card;
+}
+
+.growth-card__amount--active {
+  border-color: $color-primary;
+  color: $color-primary-dark;
+  background: $color-primary-bg;
+}
+
+.growth-card__action {
+  margin-top: $spacing-xl;
+}

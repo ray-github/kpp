@@ -1,0 +1,33 @@
+---
+description: 课补补 monorepo 结构与开发流程
+alwaysApply: true
+---
+
+# 项目结构
+
+```
+prj_mp_kpp/
+  apps/miniapp/    # Taro 微信小程序
+  apps/api/        # NestJS API
+  .env             # 本地密钥（gitignore）
+  docker-compose.yml  # 仅 Redis
+  screenshots/     # UI 参考
+```
+
+## 开发顺序
+
+1. `docker compose up -d` 启动 Redis
+2. 确认本地 PostgreSQL 已建库 `kpp`
+3. `apps/miniapp`：`pnpm dev:weapp` → 微信开发者工具打开 `dist/`
+4. `apps/api`：`pnpm start:dev`
+
+## 约定
+
+- 前端 mock 与真实 API 通过 `services/request` 或 env 开关切换
+- 新页面先在 `app.config.ts` 注册路由；Tab 页不超过 4 个
+- 提交前不提交 `.env`；只更新 `.env.example` 占位符
+
+## Cursor 协作
+
+- 改 miniapp 时遵守 `weapp-*` rules；改 api 时遵守 `backend-nestjs`
+- UI 对齐 `screenshots/` 四张参考图，主色 `#66CCFF`

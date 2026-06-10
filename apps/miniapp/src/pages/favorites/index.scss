@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.favorites {
+  min-height: 100vh;
+  background: $color-bg;
+  padding: $spacing-md;
+}
+
+.favorites__grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.favorites__item-wrap {
+  position: relative;
+}
+
+.favorites__remove {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  color: $color-white;
+  font-size: 22px;
+  padding: 8px 16px;
+  border-radius: $radius-sm;
+}

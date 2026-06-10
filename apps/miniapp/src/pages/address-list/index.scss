@@ -1,0 +1,11 @@
+@import '../../styles/secondary-page.scss';
+
+.address-list__default {
+  display: inline-block;
+  font-size: 20px;
+  color: $color-white;
+  background: $color-primary;
+  padding: 4px 12px;
+  border-radius: $radius-sm;
+  margin-left: 8px;
+}

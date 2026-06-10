@@ -1,0 +1,63 @@
+@import '../styles/variables.scss';
+
+.custom-tab-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  background: $color-white;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -1px 0 $color-border, 0 -4px 16px rgba(99, 102, 241, 0.06);
+  z-index: 999;
+}
+
+.custom-tab-bar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0 6px;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.custom-tab-bar__item--active {
+  transform: translateY(-2px);
+}
+
+.custom-tab-bar__icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3px;
+  transition: background 0.2s;
+}
+
+.custom-tab-bar__icon-wrap--active {
+  background: $grad-brand-soft;
+}
+
+.custom-tab-bar__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.custom-tab-bar__label {
+  font-size: 10px;
+  color: $color-text-muted;
+  font-weight: 400;
+}
+
+.custom-tab-bar__label--active {
+  font-size: 10px;
+  font-weight: 700;
+  background: $grad-brand;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}

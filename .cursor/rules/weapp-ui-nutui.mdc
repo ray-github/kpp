@@ -1,0 +1,28 @@
+---
+description: NutUI React Taro 组件库使用规范
+globs: apps/miniapp/**/*
+alwaysApply: false
+---
+
+# NutUI React Taro 规范
+
+## 引入
+
+- 只从 `@nutui/nutui-react-taro` 和 `@nutui/icons-react-taro` 引入，禁止用 Web 版 `@nutui/nutui-react`
+- 样式：`import '@nutui/nutui-react-taro/dist/style.css'`（或按需主题 SCSS）
+- 配置 `babel-plugin-import` 或官方推荐的按需加载，避免全量打入主包
+
+## TabBar
+
+- 底部 4 Tab 用微信原生 `tabBar`（`app.config.ts`），不要用 NutUI TabBar 模拟（性能与手势冲突）
+- Tab 页禁止 `Taro.navigateTo` 进入，须用 `switchTab`
+
+## 弹层与 fixed
+
+- `Popup` / `Dialog` 在 tab 页注意层级；必要时页面根节点包一层并设 `overflow: hidden`
+- 自定义顶栏渐变区用普通 `View`，胶囊按钮区域预留 `padding-top: env(safe-area-inset-top)`
+
+## 主题
+
+- 品牌色通过 SCSS 变量覆盖 `--nutui-brand-color`，对齐项目 `#66CCFF`
+- 3D 品类图用 `Image` 本地/CDN 资源，不用 CSS 3D transform（小程序支持差）

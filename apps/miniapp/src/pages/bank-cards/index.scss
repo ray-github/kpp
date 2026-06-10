@@ -1,0 +1,15 @@
+@import '../../styles/secondary-page.scss';
+
+.bank-cards__card-no {
+  font-size: 32px;
+  letter-spacing: 4px;
+  color: $color-text;
+  margin: 8px 0;
+}
+
+.bank-cards__form-toggle {
+  text-align: center;
+  color: $color-primary-dark;
+  font-size: 26px;
+  margin-bottom: $spacing-md;
+}

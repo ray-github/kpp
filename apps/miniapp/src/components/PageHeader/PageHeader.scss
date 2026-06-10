@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.page-header {
+  background: $color-white;
+  border-bottom: 1px solid $color-divider;
+  flex-shrink: 0;
+}
+
+.page-header__status {
+  width: 100%;
+}
+
+.page-header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: $spacing-sm;
+  box-sizing: border-box;
+}
+
+.page-header__left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.page-header__back {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.page-header__back-icon {
+  font-size: 22px;
+  line-height: 1;
+  color: $color-text;
+  font-weight: 300;
+}
+
+.page-header__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.page-header__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
