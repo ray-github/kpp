@@ -93,20 +93,42 @@ model Category {
 }
 
 model Course {
-  id         String     @id @default(cuid())
-  title      String
-  subtitle   String?
-  tags       String[]   @default([])
-  price      Decimal    @db.Decimal(10, 2)
-  coverUrl   String?
-  coverBg    String?
-  type       CourseType @default(COURSE)
-  categoryId String?
-  category   Category?  @relation(fields: [categoryId], references: [id])
-  city       String?
-  published  Boolean    @default(true)
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id              String     @id @default(cuid())
+  title           String
+  subtitle        String?
+  tags            String[]   @default([])
+  price           Decimal    @db.Decimal(10, 2)
+  originalPrice   Decimal?   @db.Decimal(10, 2)
+  coverUrl        String?
+  coverBg         String?
+  detailImageUrl  String?
+  type            CourseType @default(COURSE)
+  categoryId      String?
+  category        Category?  @relation(fields: [categoryId], references: [id])
+  city            String?
+  district        String?
+  address         String?
+  storeName       String?
+  institutionName String?
+  targetAudience  String?
+  brandName       String?
+  memberPrice     Decimal?   @db.Decimal(10, 2)
+  ageRange        String?
+  rating          Float?
+  enrollCount     Int?
+  sales           Int?
+  reviewCount     Int        @default(0)
+  description     String?
+  facilityTags    String[]   @default([])
+  serviceTags     String[]   @default([])
+  policyTags      String[]   @default([])
+  featureTags     String[]   @default([])
+  overview        Json?
+  syllabus        Json?
+  sortOrder       Int        @default(0)
+  published       Boolean    @default(true)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
   cartItems       CartItem[]
   orderItems      OrderItem[]

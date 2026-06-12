@@ -1,4 +1,4 @@
-import { request, USE_MOCK } from './request'
+import { request, USE_MOCK, BASE_URL } from './request'
 import {
   HOME_CATEGORIES,
   HOME_COUPONS,
@@ -56,16 +56,29 @@ export interface CourseListQuery {
   pageSize?: number
 }
 
-function mapCourseItem(item: CourseCardItem & { coverBg?: string; coverImage?: string }): CourseCardItem {
+function resolveAssetUrl(url?: string | null) {
+  if (!url) return undefined
+  if (/^https?:\/\//.test(url)) return url
+  const origin = BASE_URL.replace(/\/api\/?$/, '')
+  return `${origin}${url.startsWith('/') ? url : `/${url}`}`
+}
+
+function mapCourseItem(
+  item: CourseCardItem & { coverBg?: string; coverImage?: string; coverUrl?: string | null },
+): CourseCardItem {
   return {
     id: item.id,
     title: item.title,
     subtitle: item.subtitle || '',
     tags: item.tags || [],
-    price: item.price,
+    price: Number(item.price),
     coverBg: item.coverBg || 'linear-gradient(135deg, #66ccff 0%, #38bdf8 100%)',
-    coverImage: item.coverImage,
+    coverImage: item.coverImage || resolveAssetUrl(item.coverUrl),
   }
+}
+
+export async function fetchRecommendedCourses(pageSize = 6): Promise<PaginatedCourses> {
+  return fetchCourseList({ page: 1, pageSize })
 }
 
 function sortCourses(items: CourseListItem[], sort: CourseSortKey = 'default') {
@@ -114,7 +127,9 @@ export async function fetchCourseList(query: CourseListQuery = {}): Promise<Pagi
   }
 
   const params = new URLSearchParams()
-  if (query.categoryId) params.set('categoryId', query.categoryId)
+  if (query.categoryId && query.categoryId !== 'all') {
+    params.set('categoryId', query.categoryId)
+  }
   if (query.keyword) params.set('keyword', query.keyword)
   if (query.sort) params.set('sort', query.sort)
   params.set('page', String(page))
@@ -193,7 +208,11 @@ export async function fetchBanners(): Promise<BannerItem[]> {
       },
     ]
   }
-  return request<BannerItem[]>({ url: '/catalog/banners' })
+  const banners = await request<BannerItem[]>({ url: '/catalog/banners' })
+  return banners.map((banner) => ({
+    ...banner,
+    imageUrl: banner.imageUrl ? resolveAssetUrl(banner.imageUrl) : banner.imageUrl,
+  }))
 }
 
 export async function fetchNewcomerCoupons(): Promise<CouponItem[]> {
@@ -218,15 +237,21 @@ export async function fetchCourseDetail(id: string): Promise<CourseDetail> {
     return getCourseDetail(id)
   }
 
-  const item = await request<CourseDetail>({ url: `/catalog/courses/${id}` })
+  const item = await request<
+    CourseDetail & { coverUrl?: string | null; detailImageUrl?: string | null }
+  >({ url: `/catalog/courses/${id}` })
+  const coverImage = item.coverImage || resolveAssetUrl(item.coverUrl)
+  const detailImage =
+    item.detailImage || resolveAssetUrl(item.detailImageUrl) || coverImage
+
   return {
     id: item.id,
     title: item.title,
     subtitle: item.subtitle || '',
     tags: item.tags || [],
-    price: item.price,
+    price: Number(item.price),
     coverBg: item.coverBg || 'linear-gradient(135deg, #66ccff 0%, #38bdf8 100%)',
-    coverImage: item.coverImage,
+    coverImage,
     description: item.description,
     categoryName: item.categoryName,
     city: item.city,
@@ -237,14 +262,14 @@ export async function fetchCourseDetail(id: string): Promise<CourseDetail> {
     brandName: item.brandName,
     memberPrice: item.memberPrice,
     originalPrice: item.originalPrice,
-    facilityTags: item.facilityTags,
-    serviceTags: item.serviceTags,
-    policyTags: item.policyTags,
-    featureTags: item.featureTags,
+    facilityTags: item.facilityTags || [],
+    serviceTags: item.serviceTags || ['评价', '预约', '咨询', '试听'],
+    policyTags: item.policyTags || ['随时退', '过期自动退'],
+    featureTags: item.featureTags || item.tags || [],
     overview: item.overview,
     syllabus: item.syllabus,
     reviewCount: item.reviewCount,
-    detailImage: item.detailImage,
+    detailImage,
     type: item.type,
     categoryId: item.categoryId,
     rating: item.rating,

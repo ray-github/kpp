@@ -1,8 +1,19 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { CourseType } from '@prisma/client'
+import { CourseType, Prisma } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { RedisService } from '../../redis/redis.service'
 import { decimalToNumber } from '../../common/utils/helpers'
+
+const CATEGORY_SLUG_MAP: Record<string, string> = {
+  chinese: '语文',
+  math: '数学',
+  physics: '物理',
+  chemistry: '化学',
+  english: '外语',
+  music: '音乐',
+  dance: '舞蹈',
+  coding: '编程',
+}
 
 @Injectable()
 export class CatalogService {
@@ -10,6 +21,63 @@ export class CatalogService {
     private readonly prisma: PrismaService,
     private readonly redis: RedisService,
   ) {}
+
+  private mapCourseListItem(course: Prisma.CourseGetPayload<{ include: { category: true } }>) {
+    return {
+      id: course.id,
+      title: course.title,
+      subtitle: course.subtitle,
+      tags: course.tags,
+      price: decimalToNumber(course.price),
+      originalPrice: course.originalPrice ? decimalToNumber(course.originalPrice) : null,
+      coverUrl: course.coverUrl,
+      coverBg: course.coverBg,
+      type: course.type,
+      categoryId: course.categoryId,
+      categoryName: course.category?.name,
+      rating: course.rating,
+      enrollCount: course.enrollCount,
+      sales: course.sales,
+      ageRange: course.ageRange,
+      institutionName: course.institutionName,
+      sortOrder: course.sortOrder,
+    }
+  }
+
+  private mapCourseDetail(course: Prisma.CourseGetPayload<{ include: { category: true } }>) {
+    return {
+      ...this.mapCourseListItem(course),
+      detailImageUrl: course.detailImageUrl,
+      city: course.city,
+      district: course.district,
+      address: course.address,
+      storeName: course.storeName,
+      targetAudience: course.targetAudience,
+      brandName: course.brandName,
+      memberPrice: course.memberPrice ? decimalToNumber(course.memberPrice) : null,
+      description: course.description,
+      facilityTags: course.facilityTags,
+      serviceTags: course.serviceTags,
+      policyTags: course.policyTags,
+      featureTags: course.featureTags,
+      overview: course.overview,
+      syllabus: course.syllabus,
+      reviewCount: course.reviewCount,
+    }
+  }
+
+  private async resolveCategoryId(categoryId?: string) {
+    if (!categoryId || categoryId === 'all') return undefined
+
+    const byId = await this.prisma.category.findUnique({ where: { id: categoryId } })
+    if (byId) return byId.id
+
+    const categoryName = CATEGORY_SLUG_MAP[categoryId]
+    if (!categoryName) return categoryId
+
+    const bySlug = await this.prisma.category.findFirst({ where: { name: categoryName } })
+    return bySlug?.id
+  }
 
   async getCategories() {
     const cacheKey = 'catalog:categories'
@@ -41,34 +109,26 @@ export class CatalogService {
     const safePage = Math.max(1, page)
     const safeSize = Math.min(50, Math.max(1, pageSize))
     const skip = (safePage - 1) * safeSize
+    const resolvedCategoryId = await this.resolveCategoryId(categoryId)
 
     const where = {
       published: true,
       ...(type ? { type } : {}),
-      ...(categoryId ? { categoryId } : {}),
+      ...(resolvedCategoryId ? { categoryId: resolvedCategoryId } : {}),
     }
 
     const [courses, total] = await Promise.all([
       this.prisma.course.findMany({
         where,
-        orderBy: { createdAt: 'desc' },
+        include: { category: true },
+        orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
         skip,
         take: safeSize,
       }),
       this.prisma.course.count({ where }),
     ])
 
-    const items = courses.map((course) => ({
-      id: course.id,
-      title: course.title,
-      subtitle: course.subtitle,
-      tags: course.tags,
-      price: decimalToNumber(course.price),
-      coverUrl: course.coverUrl,
-      coverBg: course.coverBg,
-      type: course.type,
-      categoryId: course.categoryId,
-    }))
+    const items = courses.map((course) => this.mapCourseListItem(course))
 
     return {
       items,
@@ -89,20 +149,7 @@ export class CatalogService {
       throw new NotFoundException('课程不存在')
     }
 
-    return {
-      id: course.id,
-      title: course.title,
-      subtitle: course.subtitle,
-      tags: course.tags,
-      price: decimalToNumber(course.price),
-      coverUrl: course.coverUrl,
-      coverBg: course.coverBg,
-      type: course.type,
-      categoryId: course.categoryId,
-      categoryName: course.category?.name,
-      city: course.city,
-      description: `${course.title}，${course.subtitle || '优质课程'}。平台保障，一课一消，放心报名。`,
-    }
+    return this.mapCourseDetail(course)
   }
 
   async getBanners() {

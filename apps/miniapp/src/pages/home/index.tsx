@@ -7,7 +7,7 @@ import { CourseCardItem, HOME_CATEGORY_ROUTE_MAP } from '@/mock/home'
 import {
   fetchBanners,
   fetchCategories,
-  fetchCoursesPage,
+  fetchRecommendedCourses,
   BannerItem,
   CategoryItem,
 } from '@/services/catalog'
@@ -27,7 +27,7 @@ export default function HomePage() {
   const [banners, setBanners] = useState<BannerItem[]>([])
 
   const loadCourses = async () => {
-    const result = await fetchCoursesPage(0, 1, 6)
+    const result = await fetchRecommendedCourses(6)
     setCourses(result.items)
   }
 

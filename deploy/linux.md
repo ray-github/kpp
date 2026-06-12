@@ -86,9 +86,15 @@ git pull
 npm install
 npm run prisma:generate
 npm run prisma:deploy
+npm run prisma:seed --workspace=apps/api
 npm run build:api
 npm run pm2:restart
 ```
+
+课程封面与轮播图由 API 静态目录 `apps/api/public/assets` 提供，访问路径形如：
+`http://<ECS公网IP>:3000/assets/courses/course-math.png`
+
+小程序联调时除 `request` 域名外，还需在微信后台配置 **downloadFile 合法域名**（与 API 同域），否则课程封面图可能无法显示。
 
 ## 常用命令
 
