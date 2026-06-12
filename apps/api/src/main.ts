@@ -6,21 +6,24 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import { AppModule } from './app.module'
 
-function resolvePublicDir() {
+function resolveAssetsDir() {
   const candidates = [
-    join(process.cwd(), 'apps', 'api', 'public'),
-    join(process.cwd(), 'public'),
-    join(__dirname, '..', '..', 'public'),
+    join(process.cwd(), 'apps', 'api', 'public', 'assets'),
+    join(process.cwd(), 'public', 'assets'),
+    join(__dirname, '..', '..', 'public', 'assets'),
   ]
   return candidates.find((dir) => existsSync(dir))
 }
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
-  const publicDir = resolvePublicDir()
+  const assetsDir = resolveAssetsDir()
 
-  if (publicDir) {
-    app.useStaticAssets(publicDir, { prefix: '/assets' })
+  if (assetsDir) {
+    app.useStaticAssets(assetsDir, { prefix: '/assets' })
+    console.log(`Static assets served from ${assetsDir} at /assets`)
+  } else {
+    console.warn('Static assets directory not found; /assets/* will 404')
   }
 
   app.enableCors({ origin: true })
