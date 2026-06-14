@@ -26,7 +26,7 @@ export default function OrderCard({ order, onClick }: OrderCardProps) {
       <View className='order-card__body'>
         <View
           className='order-card__cover'
-          style={{ background: firstItem?.course.coverBg || '#66ccff' }}
+          style={{ background: firstItem?.course.coverBg || 'linear-gradient(135deg, #7C3AED 0%, #38BDF8 100%)' }}
         />
         <View className='order-card__info'>
           <Text className='order-card__title'>{title}</Text>

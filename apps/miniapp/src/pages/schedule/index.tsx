@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDidShow } from '@tarojs/taro'
 import { View, Text, ScrollView } from '@tarojs/components'
 import EmptyState from '@/components/EmptyState'
 import { fetchEnrollments, EnrollmentItem } from '@/services/enrollment'
+import { getNavBarMetrics } from '@/utils/nav-bar'
 import { syncTabBarSelected } from '@/utils/tab-bar'
 import './index.scss'
 
 export default function SchedulePage() {
   const [total, setTotal] = useState(0)
   const [items, setItems] = useState<EnrollmentItem[]>([])
+  const navMetrics = useMemo(() => getNavBarMetrics(), [])
 
   useDidShow(() => {
     syncTabBarSelected()
@@ -19,26 +21,33 @@ export default function SchedulePage() {
   })
 
   return (
-    <View className='schedule page page--white'>
-      <View className='schedule__status-bar' />
-
-      {/* 顶部 */}
+    <View className='schedule page'>
       <View className='schedule__header'>
-        <View>
+        <View
+          className='schedule__capsule-spacer'
+          style={{
+            height: `${navMetrics.statusBarHeight + navMetrics.navContentHeight}px`,
+          }}
+        />
+        <View className='schedule__header-main'>
           <Text className='schedule__title'>我的课程</Text>
-          <Text className='schedule__count'>共 {total} 门</Text>
-        </View>
-        <View className='schedule__filter'>
-          <Text className='schedule__filter-text'>全部</Text>
-          <Text className='schedule__filter-arrow'>▾</Text>
+          <View className='schedule__header-right'>
+            <View className='schedule__filter'>
+              <Text className='schedule__filter-text'>全部</Text>
+              <Text className='schedule__filter-arrow'>▾</Text>
+            </View>
+            <Text className='schedule__count'>共 {total} 门</Text>
+          </View>
         </View>
       </View>
 
       {items.length === 0 ? (
-        <EmptyState
-          title='还没有课程'
-          subtitle='快去报名喜欢的课程吧~'
-        />
+        <View className='schedule__empty-wrap'>
+          <EmptyState
+            title='还没有课程'
+            subtitle='快去报名喜欢的课程吧~'
+          />
+        </View>
       ) : (
         <ScrollView className='schedule__list' scrollY>
           {items.map((item) => {

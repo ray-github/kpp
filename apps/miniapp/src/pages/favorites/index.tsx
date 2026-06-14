@@ -19,7 +19,7 @@ export default function FavoritesPage() {
   }
 
   return (
-    <ScrollView className='favorites page' scrollY>
+    <ScrollView className='favorites secondary-page page' scrollY>
       {items.length === 0 ? (
         <EmptyState title='暂无收藏' subtitle='收藏感兴趣的课程，方便下次查看' />
       ) : (

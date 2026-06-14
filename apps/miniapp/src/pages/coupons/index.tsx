@@ -21,7 +21,7 @@ export default function CouponsPage() {
   })
 
   return (
-    <ScrollView className='coupons page' scrollY>
+    <ScrollView className='coupons secondary-page page' scrollY>
       {coupons.length === 0 ? (
         <EmptyState title='暂无优惠券' subtitle='去首页领取新人券吧' />
       ) : (

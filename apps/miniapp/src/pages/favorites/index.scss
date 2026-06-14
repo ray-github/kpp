@@ -1,15 +1,9 @@
-@import '../../styles/variables.scss';
-
-.favorites {
-  min-height: 100vh;
-  background: $color-bg;
-  padding: $spacing-md;
-}
+@import '../../styles/secondary-page.scss';
 
 .favorites__grid {
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-sm;
 }
 
 .favorites__item-wrap {
@@ -18,12 +12,12 @@
 
 .favorites__remove {
   position: absolute;
-  top: $spacing-sm;
-  right: $spacing-sm;
+  top: $spacing-xs;
+  right: $spacing-xs;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   color: $color-white;
-  font-size: 22px;
-  padding: 8px 16px;
-  border-radius: $radius-sm;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: $radius-pill;
 }

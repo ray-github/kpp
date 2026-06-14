@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Taro, { useRouter, useDidShow } from '@tarojs/taro'
 import { View, Text, ScrollView, Image } from '@tarojs/components'
 import { fetchCourseDetail, CourseDetail } from '@/services/catalog'
+import { DETAIL_REVIEW_PREVIEW } from '@/mock/course-reviews'
 import { addCourseToCart } from '@/services/cart'
 import { goToCartWithReturn } from '@/utils/cart-nav'
 import { recordBrowseHistory } from '@/services/user-center'
@@ -94,13 +95,25 @@ export default function CourseDetailPage() {
       Taro.showToast({ title: '暂无地址', icon: 'none' })
       return
     }
+    if (course.latitude == null || course.longitude == null) {
+      Taro.showToast({ title: '暂无位置坐标', icon: 'none' })
+      return
+    }
     Taro.openLocation({
-      latitude: 31.221517,
-      longitude: 121.544379,
+      latitude: course.latitude,
+      longitude: course.longitude,
       name: course.storeName || course.title,
       address: course.address,
+      scale: 16,
     })
   }
+
+  const goAllReviews = () => {
+    if (!course || !(course.reviewCount || course.reviews?.length)) return
+    Taro.navigateTo({ url: `/pages/course-reviews/index?id=${course.id}` })
+  }
+
+  const previewReviews = (course?.reviews || []).slice(0, DETAIL_REVIEW_PREVIEW)
 
   if (!course) {
     return (
@@ -293,9 +306,30 @@ export default function CourseDetailPage() {
             <Text className='course-detail__section-title'>
               学员评价 ({course.reviewCount || 0})
             </Text>
-            <Text className='course-detail__section-link'>查看全部 ›</Text>
+            {(course.reviewCount || 0) > 0 ? (
+              <Text className='course-detail__section-link' onClick={goAllReviews}>
+                查看全部 ›
+              </Text>
+            ) : null}
           </View>
-          <Text className='course-detail__empty-text'>暂无评价</Text>
+          {previewReviews.length > 0 ? (
+            <View className='course-detail__review-list'>
+              {previewReviews.map((review) => (
+                <View key={review.id} className='course-detail__review-item'>
+                  <View className='course-detail__review-head'>
+                    <Text className='course-detail__review-user'>{review.userName}</Text>
+                    <Text className='course-detail__review-rating'>
+                      {'★'.repeat(Math.round(review.rating))}
+                    </Text>
+                  </View>
+                  <Text className='course-detail__review-content'>{review.content}</Text>
+                  <Text className='course-detail__review-date'>{review.createdAt}</Text>
+                </View>
+              ))}
+            </View>
+          ) : (
+            <Text className='course-detail__empty-text'>暂无评价</Text>
+          )}
         </View>
 
         <View className='course-detail__section-card'>

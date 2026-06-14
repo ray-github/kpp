@@ -57,8 +57,9 @@ export default function ConsumeCodePage() {
 
   if (codes.length === 0) {
     return (
-      <View className='consume-code page'>
+      <View className='consume-code consume-code--empty page'>
         <EmptyState
+          compact
           title='暂无可用课消码'
           subtitle='购买课程后可在此出示核销'
           actionText='去逛逛'

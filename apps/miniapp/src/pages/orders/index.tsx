@@ -55,7 +55,9 @@ export default function OrdersPage() {
 
       <ScrollView className='orders__list' scrollY>
         {orders.length === 0 ? (
-          <EmptyState title='暂无订单' subtitle='快去报名喜欢的课程吧~' />
+          <View className='orders__empty'>
+            <EmptyState compact title='暂无订单' subtitle='快去报名喜欢的课程吧~' />
+          </View>
         ) : (
           orders.map((order) => (
             <OrderCard

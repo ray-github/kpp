@@ -36,6 +36,12 @@ export class CatalogController {
     )
   }
 
+  @Get('courses/:id/reviews')
+  @ApiOperation({ summary: '课程学员评价' })
+  getCourseReviews(@Param('id') id: string) {
+    return this.catalogService.getCourseReviews(id)
+  }
+
   @Get('courses/:id')
   @ApiOperation({ summary: '课程详情' })
   getCourseById(@Param('id') id: string) {

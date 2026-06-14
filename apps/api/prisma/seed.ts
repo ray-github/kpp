@@ -1,6 +1,16 @@
 import './load-env'
-import { CourseType, PrismaClient } from '@prisma/client'
+import { CourseType, Prisma, PrismaClient } from '@prisma/client'
 import { seedBanners, seedCategories, seedCourses } from './seed-data'
+import { buildSeedReviews, SEED_REVIEW_SNIPPETS } from './review-data'
+
+const COURSE_COORDS: Record<number, { latitude: number; longitude: number }> = {
+  1: { latitude: 31.19515, longitude: 121.43652 },
+  2: { latitude: 31.22774, longitude: 121.52201 },
+  3: { latitude: 31.22859, longitude: 121.44568 },
+  4: { latitude: 31.22439, longitude: 121.46989 },
+  5: { latitude: 31.21721, longitude: 121.41789 },
+  6: { latitude: 31.23786, longitude: 121.44725 },
+}
 
 const prisma = new PrismaClient()
 
@@ -26,6 +36,8 @@ async function main() {
   }
 
   for (const item of seedCourses) {
+    const coords = COURSE_COORDS[item.sortOrder]
+    const snippets = SEED_REVIEW_SNIPPETS[item.sortOrder] || []
     await prisma.course.create({
       data: {
         sortOrder: item.sortOrder,
@@ -42,6 +54,9 @@ async function main() {
         city: item.city,
         district: item.district,
         address: item.address,
+        latitude: coords?.latitude,
+        longitude: coords?.longitude,
+        reviews: buildSeedReviews(item.reviewCount, snippets) as unknown as Prisma.InputJsonValue,
         storeName: item.storeName,
         institutionName: item.institutionName,
         targetAudience: item.targetAudience,

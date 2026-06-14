@@ -3,35 +3,51 @@
 .schedule {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-.schedule__status-bar {
-  height: 44px;
-  background: $color-white;
+  height: 100vh;
+  overflow: hidden;
+  background: $color-bg;
+  box-sizing: border-box;
 }
 
 // ─── Header ──────────────────────────────────────────────────
 .schedule__header {
+  background: $color-white;
+  padding: 0 $spacing-md $spacing-md;
+  border-bottom: 1px solid $color-divider;
+  flex-shrink: 0;
+}
+
+.schedule__capsule-spacer {
+  width: 100%;
+}
+
+.schedule__header-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $spacing-sm $spacing-md $spacing-md;
-  background: $color-white;
-  border-bottom: 1px solid $color-divider;
+  gap: $spacing-sm;
+  box-sizing: border-box;
 }
 
 .schedule__title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   color: $color-text;
-  display: block;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.schedule__header-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
 }
 
 .schedule__count {
-  font-size: 12px;
+  font-size: 13px;
   color: $color-text-muted;
-  margin-top: 2px;
+  white-space: nowrap;
 }
 
 .schedule__filter {
@@ -39,8 +55,9 @@
   align-items: center;
   gap: 4px;
   background: $color-primary-bg;
-  padding: 6px 14px;
+  padding: 7px 14px;
   border-radius: $radius-pill;
+  flex-shrink: 0;
 }
 
 .schedule__filter-text {
@@ -54,12 +71,22 @@
   color: $color-primary;
 }
 
+// ─── Empty ───────────────────────────────────────────────────
+.schedule__empty-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // ─── List ────────────────────────────────────────────────────
 .schedule__list {
   flex: 1;
-  min-height: 0;
-  background: $color-bg;
-  padding: $spacing-sm $spacing-md;
+  height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: $spacing-sm $spacing-md 0;
 }
 
 .schedule__list-space {
@@ -71,8 +98,8 @@
   align-items: center;
   background: $color-white;
   border-radius: $radius-lg;
-  padding: $spacing-sm $spacing-md $spacing-sm $spacing-md;
-  margin-bottom: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-sm;
   box-shadow: $shadow-card;
   overflow: hidden;
   position: relative;
@@ -89,8 +116,8 @@
 }
 
 .schedule__cover {
-  width: 60px;
-  height: 60px;
+  width: 68px;
+  height: 68px;
   border-radius: $radius-md;
   margin-left: $spacing-xs;
   margin-right: $spacing-sm;
@@ -103,21 +130,24 @@
 }
 
 .schedule__course-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: $color-text;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .schedule__subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: $color-text-muted;
   display: block;
   margin-bottom: $spacing-xs;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // ─── Progress ────────────────────────────────────────────────
@@ -129,7 +159,7 @@
 
 .schedule__progress-bar {
   flex: 1;
-  height: 4px;
+  height: 5px;
   background: $color-primary-bg;
   border-radius: $radius-pill;
   overflow: hidden;
@@ -143,7 +173,7 @@
 }
 
 .schedule__progress-text {
-  font-size: 11px;
+  font-size: 12px;
   color: $color-primary;
   font-weight: 600;
   white-space: nowrap;

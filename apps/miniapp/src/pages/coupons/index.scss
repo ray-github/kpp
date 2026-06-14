@@ -1,19 +1,14 @@
-@import '../../styles/variables.scss';
-
-.coupons {
-  min-height: 100vh;
-  background: $color-bg;
-  padding: $spacing-md;
-}
+@import '../../styles/secondary-page.scss';
 
 .coupons__item {
   display: flex;
   align-items: center;
-  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
-  border: 1px solid #ffccc7;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.06) 0%, $color-white 100%);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   border-radius: $radius-lg;
   padding: $spacing-sm $spacing-md;
   margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
 }
 
 .coupons__item--used {
@@ -21,16 +16,23 @@
 }
 
 .coupons__amount {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
   color: $color-coupon;
   margin-right: $spacing-md;
+  flex-shrink: 0;
+}
+
+.coupons__info {
+  flex: 1;
+  min-width: 0;
 }
 
 .coupons__title {
   display: block;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  color: $color-text;
   margin-bottom: 4px;
 }
 

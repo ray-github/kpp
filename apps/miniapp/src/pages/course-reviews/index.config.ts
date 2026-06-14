@@ -1,6 +1,5 @@
 export default definePageConfig({
-  navigationStyle: 'custom',
-  navigationBarTitleText: '课程',
+  navigationBarTitleText: '学员评价',
 })
 
 function definePageConfig(config: Taro.PageConfig) {

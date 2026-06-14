@@ -81,7 +81,7 @@ export default function AddressEditPage() {
       <View className='form-page__group'>
         <View className='form-page__switch-row'>
           <Text className='form-page__switch-label'>设为默认地址</Text>
-          <Switch checked={isDefault} onChange={(e) => setIsDefault(e.detail.value)} color='#66ccff' />
+          <Switch checked={isDefault} onChange={(e) => setIsDefault(e.detail.value)} color='#6366F1' />
         </View>
       </View>
 

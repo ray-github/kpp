@@ -3,43 +3,48 @@
 .order-detail {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: $color-bg;
 }
 
 .order-detail__loading {
-  padding: 120px;
+  display: block;
+  padding: 60px;
   text-align: center;
+  font-size: 13px;
   color: $color-text-muted;
 }
 
 .order-detail__scroll {
   flex: 1;
-  min-height: 0;
-  padding-bottom: 140px;
+  height: 0;
+  padding-bottom: 80px;
+  box-sizing: border-box;
 }
 
 .order-detail__status-card {
-  background: linear-gradient(135deg, #7dd3fc 0%, #66ccff 100%);
-  padding: 48px $spacing-lg;
+  background: $grad-brand;
+  padding: $spacing-lg $spacing-md;
   color: $color-white;
 }
 
 .order-detail__status {
   display: block;
-  font-size: 40px;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
 .order-detail__no {
-  font-size: 24px;
+  display: block;
+  font-size: 12px;
   opacity: 0.9;
 }
 
 .order-detail__section {
   background: $color-white;
-  margin: $spacing-md;
+  margin: $spacing-sm $spacing-md 0;
   border-radius: $radius-lg;
   padding: $spacing-md;
   box-shadow: $shadow-card;
@@ -47,58 +52,86 @@
 
 .order-detail__section-title {
   display: block;
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: $spacing-md;
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-text;
+  margin-bottom: $spacing-sm;
 }
 
 .order-detail__item {
   display: flex;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .order-detail__cover {
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   border-radius: $radius-md;
-  margin-right: $spacing-md;
+  margin-right: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.order-detail__item-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .order-detail__item-title {
   display: block;
-  font-size: 28px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 8px;
+  color: $color-text;
+  margin-bottom: 4px;
 }
 
 .order-detail__item-sub {
   display: block;
-  font-size: 22px;
+  font-size: 11px;
   color: $color-text-muted;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .order-detail__item-price {
-  font-size: 26px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
   color: $color-coupon;
 }
 
 .order-detail__row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 26px;
-  color: $color-text-secondary;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.order-detail__row--strong {
+.order-detail__row-label {
+  font-size: 13px;
+  color: $color-text-secondary;
+}
+
+.order-detail__row-value {
+  font-size: 13px;
+  color: $color-text;
+}
+
+.order-detail__row--strong .order-detail__row-label {
   color: $color-text;
   font-weight: 600;
 }
 
 .order-detail__pay {
+  font-size: 16px;
+  font-weight: 700;
   color: $color-coupon;
-  font-size: 32px;
 }
 
 .order-detail__footer {
@@ -106,13 +139,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: $spacing-md;
-  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom));
+  padding: $spacing-sm $spacing-md;
+  padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
   background: $color-white;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -2px 12px rgba(99, 102, 241, 0.1);
 }
 
 .order-detail__refund-btn {
   --nutui-button-default-color: #{$color-coupon};
   --nutui-button-default-border-color: #{$color-coupon};
+  --nutui-button-default-font-size: 14px;
+  --nutui-button-default-height: 40px;
+}
+
+.order-detail__footer .nut-button--primary {
+  --nutui-button-primary-font-size: 14px;
+  --nutui-button-primary-height: 40px;
 }

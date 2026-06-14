@@ -4,57 +4,68 @@
   min-height: 100vh;
   background: $color-bg;
   padding: $spacing-md;
+  box-sizing: border-box;
 }
 
 .growth-card__balance-card {
-  background: linear-gradient(135deg, #66ccff 0%, #38bdf8 100%);
+  background: $grad-brand;
   border-radius: $radius-lg;
-  padding: $spacing-lg;
+  padding: $spacing-md;
   color: $color-white;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-float;
 }
 
 .growth-card__label {
   display: block;
-  font-size: 24px;
+  font-size: 12px;
   opacity: 0.9;
 }
 
 .growth-card__balance {
   display: block;
-  font-size: 56px;
-  font-weight: 700;
-  margin: 12px 0;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 6px 0;
 }
 
 .growth-card__tip {
-  font-size: 22px;
+  font-size: 11px;
   opacity: 0.9;
+}
+
+.growth-card__amounts {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
 }
 
 .growth-card__section-title {
   display: block;
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: $spacing-md;
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-text;
+  margin-bottom: $spacing-sm;
 }
 
 .growth-card__grid {
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-md;
+  gap: $spacing-sm;
 }
 
 .growth-card__amount {
-  width: calc(50% - 8px);
-  background: $color-white;
+  width: calc(50% - 6px);
+  background: $color-bg;
   border-radius: $radius-md;
-  padding: 28px 0;
+  padding: $spacing-md 0;
   text-align: center;
-  font-size: 32px;
-  font-weight: 600;
-  border: 2px solid transparent;
-  box-shadow: $shadow-card;
+  font-size: 16px;
+  font-weight: 700;
+  color: $color-text;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
 }
 
 .growth-card__amount--active {
@@ -64,5 +75,5 @@
 }
 
 .growth-card__action {
-  margin-top: $spacing-xl;
+  margin-top: $spacing-md;
 }

@@ -1,24 +1,30 @@
-@import '../../styles/variables.scss';
+@import '../../styles/secondary-page.scss';
 
 .consume-code {
   min-height: 100vh;
   background: $color-bg;
+  box-sizing: border-box;
+}
+
+.consume-code--empty {
+  padding: $spacing-md;
 }
 
 .consume-code__courses {
   white-space: nowrap;
-  padding: $spacing-md;
+  padding: $spacing-md $spacing-md $spacing-sm;
 }
 
 .consume-code__course {
   display: inline-block;
-  min-width: 240px;
+  min-width: 140px;
   background: $color-white;
   border-radius: $radius-lg;
-  padding: $spacing-md;
-  margin-right: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  margin-right: $spacing-sm;
   box-shadow: $shadow-card;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  vertical-align: top;
 }
 
 .consume-code__course--active {
@@ -28,21 +34,23 @@
 
 .consume-code__course-title {
   display: block;
-  font-size: 26px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 8px;
+  color: $color-text;
+  margin-bottom: 4px;
 }
 
 .consume-code__course-sub {
-  font-size: 22px;
+  display: block;
+  font-size: 11px;
   color: $color-text-muted;
 }
 
 .consume-code__panel {
-  margin: 0 $spacing-md;
+  margin: 0 $spacing-md $spacing-md;
   background: $color-white;
   border-radius: $radius-lg;
-  padding: $spacing-lg;
+  padding: $spacing-md;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,56 +58,57 @@
 }
 
 .consume-code__title {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: $color-text;
+  margin-bottom: 4px;
 }
 
 .consume-code__hint {
-  font-size: 24px;
+  display: block;
+  font-size: 12px;
   color: $color-text-muted;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-md;
+  text-align: center;
 }
 
 .consume-code__qr-wrap {
-  padding: $spacing-md;
+  padding: $spacing-sm;
   background: $color-white;
   border-radius: $radius-md;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
 }
 
 .consume-code__qr-placeholder {
-  width: 360px;
-  height: 360px;
-  border: 4px solid $color-text;
+  width: 180px;
+  height: 180px;
+  border: 2px solid $color-border;
   border-radius: $radius-md;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: repeating-linear-gradient(
-    45deg,
-    #f5f5f5,
-    #f5f5f5 10px,
-    #ffffff 10px,
-    #ffffff 20px
-  );
+  background: $color-bg;
 }
 
 .consume-code__qr-icon {
-  font-size: 120px;
-  color: $color-text;
+  font-size: 56px;
+  color: $color-text-secondary;
   opacity: 0.8;
 }
 
 .consume-code__code {
-  font-size: 36px;
+  display: block;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   color: $color-text;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
 }
 
 .consume-code__refresh {
-  font-size: 24px;
-  color: $color-primary-dark;
+  display: block;
+  font-size: 12px;
+  color: $color-primary;
+  font-weight: 500;
 }

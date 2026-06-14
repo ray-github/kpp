@@ -9,42 +9,92 @@
   box-sizing: border-box;
 }
 
+// ─── Header（对齐首页）──────────────────────────────────────
 .course-list__header {
   background: $grad-brand;
-  padding: $spacing-sm $spacing-sm $spacing-md;
+  padding: 0 $spacing-md $spacing-md;
+  border-radius: 0 0 $radius-xl $radius-xl;
   flex-shrink: 0;
 }
 
-.course-list__location {
-  display: flex;
-  align-items: center;
-  margin-bottom: $spacing-sm;
+.course-list__status-bar {
+  width: 100%;
 }
 
-.course-list__location-icon {
-  font-size: 12px;
-  margin-right: 4px;
+.course-list__nav-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+.course-list__back {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.course-list__back-icon {
+  font-size: 24px;
+  line-height: 1;
+  color: $color-white;
+  font-weight: 300;
+}
+
+.course-list__nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  font-weight: 700;
+  color: $color-white;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.course-list__location-row {
+  padding: 2px 0 $spacing-sm;
+  box-sizing: border-box;
+}
+
+.course-list__location-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.course-list__location-dot {
+  font-size: 8px;
+  color: #fca5a5;
+  flex-shrink: 0;
 }
 
 .course-list__location-text {
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 700;
   color: $color-white;
-  font-weight: 600;
+  line-height: 1.2;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.course-list__location-arrow {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.8);
-  margin-left: 4px;
-}
-
-.course-list__search {
-  display: flex;
-  align-items: center;
+.course-list__search-bar {
   background: $color-white;
   border-radius: $radius-pill;
-  height: 36px;
+  display: flex;
+  align-items: center;
   padding: 0 $spacing-sm;
+  height: 36px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .course-list__search-icon {
@@ -56,6 +106,7 @@
 .course-list__search-input {
   flex: 1;
   font-size: 13px;
+  color: $color-text;
 }
 
 .course-list__search-placeholder {
@@ -63,6 +114,7 @@
   font-size: 13px;
 }
 
+// ─── Categories ─────────────────────────────────────────────
 .course-list__categories {
   background: $color-white;
   white-space: nowrap;
@@ -72,12 +124,12 @@
 
 .course-list__categories-inner {
   display: inline-flex;
-  padding: $spacing-sm $spacing-sm;
+  padding: $spacing-sm $spacing-md;
   gap: $spacing-xs;
 }
 
 .course-list__category {
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: $radius-pill;
   background: $color-bg;
   flex-shrink: 0;
@@ -88,8 +140,9 @@
 }
 
 .course-list__category-text {
-  font-size: 12px;
+  font-size: 13px;
   color: $color-text-secondary;
+  font-weight: 500;
 }
 
 .course-list__category--active .course-list__category-text {
@@ -97,11 +150,12 @@
   font-weight: 600;
 }
 
+// ─── Sort ───────────────────────────────────────────────────
 .course-list__sort-row {
   display: flex;
   align-items: center;
   background: $color-white;
-  padding: $spacing-xs $spacing-sm;
+  padding: $spacing-xs $spacing-md;
   gap: $spacing-md;
   border-bottom: 1px solid $color-divider;
   flex-shrink: 0;
@@ -114,7 +168,7 @@
 }
 
 .course-list__sort-text {
-  font-size: 12px;
+  font-size: 13px;
   color: $color-text-secondary;
 }
 
@@ -128,8 +182,9 @@
   color: $color-text-muted;
 }
 
+// ─── Growth card ────────────────────────────────────────────
 .course-list__growth-card {
-  margin: $spacing-sm $spacing-sm 0;
+  margin: $spacing-sm $spacing-md 0;
   padding: $spacing-sm $spacing-md;
   border-radius: $radius-lg;
   background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
@@ -154,7 +209,7 @@
 }
 
 .course-list__growth-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: $color-white;
 }
@@ -168,23 +223,24 @@
 }
 
 .course-list__growth-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .course-list__growth-btn {
   background: $color-white;
   border-radius: $radius-pill;
-  padding: 6px 14px;
+  padding: 7px 16px;
   flex-shrink: 0;
 }
 
 .course-list__growth-btn-text {
-  font-size: 12px;
+  font-size: 13px;
   color: $color-primary;
   font-weight: 700;
 }
 
+// ─── List ───────────────────────────────────────────────────
 .course-list__scroll {
   flex: 1;
   height: 0;
@@ -193,7 +249,7 @@
 }
 
 .course-list__list {
-  padding: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
   box-sizing: border-box;
 }
 
@@ -204,18 +260,18 @@
   box-sizing: border-box;
   background: $color-white;
   border-radius: $radius-lg;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: $spacing-sm;
   box-shadow: $shadow-subtle;
   overflow: hidden;
 }
 
 .course-list__cover {
-  width: 76px;
-  height: 76px;
+  width: 80px;
+  height: 80px;
   border-radius: $radius-md;
   flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .course-list__cover--fallback {
@@ -231,7 +287,7 @@
 }
 
 .course-list__title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: $color-text;
   line-height: 1.4;
@@ -250,8 +306,8 @@
 }
 
 .course-list__tag {
-  font-size: 10px;
-  padding: 2px 6px;
+  font-size: 11px;
+  padding: 2px 8px;
   border-radius: $radius-sm;
   max-width: 100%;
   overflow: hidden;
@@ -281,7 +337,7 @@
 }
 
 .course-list__price {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   color: $color-danger;
   flex-shrink: 0;
@@ -296,12 +352,12 @@
 }
 
 .course-list__rating {
-  font-size: 11px;
+  font-size: 12px;
   color: $color-gold;
 }
 
 .course-list__enroll {
-  font-size: 10px;
+  font-size: 11px;
   color: $color-text-muted;
 }
 
@@ -309,7 +365,7 @@
   padding: 60px 0;
   text-align: center;
   color: $color-text-muted;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .course-list__bottom-space {

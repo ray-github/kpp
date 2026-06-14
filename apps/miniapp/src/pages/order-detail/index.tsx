@@ -63,7 +63,7 @@ export default function OrderDetailPage() {
             <View key={item.id} className='order-detail__item'>
               <View
                 className='order-detail__cover'
-                style={{ background: item.course.coverBg || '#66ccff' }}
+                style={{ background: item.course.coverBg || 'linear-gradient(135deg, #7C3AED 0%, #38BDF8 100%)' }}
               />
               <View className='order-detail__item-info'>
                 <Text className='order-detail__item-title'>{item.course.title}</Text>
@@ -78,11 +78,11 @@ export default function OrderDetailPage() {
 
         <View className='order-detail__section'>
           <View className='order-detail__row'>
-            <Text>商品总额</Text>
-            <Text>¥{order.totalAmount.toFixed(2)}</Text>
+            <Text className='order-detail__row-label'>商品总额</Text>
+            <Text className='order-detail__row-value'>¥{order.totalAmount.toFixed(2)}</Text>
           </View>
           <View className='order-detail__row order-detail__row--strong'>
-            <Text>实付金额</Text>
+            <Text className='order-detail__row-label'>实付金额</Text>
             <Text className='order-detail__pay'>¥{order.payAmount.toFixed(2)}</Text>
           </View>
         </View>

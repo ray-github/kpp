@@ -5,67 +5,66 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 48px;
-  min-height: 50vh;
+  padding: 48px 24px;
+  min-height: 40vh;
 }
 
 .empty-state__icon {
-  font-size: 100px;
-  margin-bottom: $spacing-lg;
+  font-size: 48px;
+  margin-bottom: $spacing-sm;
   opacity: 0.6;
 }
 
 .empty-state__title {
-  font-size: 32px;
+  font-size: 15px;
   font-weight: 700;
   color: $color-text-secondary;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .empty-state__subtitle {
-  font-size: 26px;
+  font-size: 12px;
   color: $color-text-muted;
-  margin-bottom: $spacing-xl;
+  margin-bottom: $spacing-md;
   text-align: center;
 }
 
 .empty-state__btn {
   background: $grad-brand;
   border-radius: $radius-pill;
-  padding: 20px 80px;
+  padding: 8px 28px;
   box-shadow: $shadow-card;
 }
 
 .empty-state__btn-text {
   color: $color-white;
-  font-size: 28px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .empty-state--compact {
-  padding: 48px 24px;
+  padding: 32px 20px;
   min-height: auto;
 }
 
 .empty-state--compact .empty-state__icon {
-  font-size: 48px;
-  margin-bottom: $spacing-sm;
-}
-
-.empty-state--compact .empty-state__title {
-  font-size: 15px;
+  font-size: 40px;
   margin-bottom: 6px;
 }
 
+.empty-state--compact .empty-state__title {
+  font-size: 14px;
+}
+
 .empty-state--compact .empty-state__subtitle {
-  font-size: 12px;
-  margin-bottom: $spacing-md;
+  font-size: 11px;
+  margin-bottom: $spacing-sm;
 }
 
 .empty-state--compact .empty-state__btn {
-  padding: 8px 28px;
+  padding: 6px 22px;
 }
 
 .empty-state--compact .empty-state__btn-text {
-  font-size: 13px;
+  font-size: 12px;
 }

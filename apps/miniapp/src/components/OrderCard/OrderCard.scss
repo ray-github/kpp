@@ -4,24 +4,26 @@
   background: $color-white;
   border-radius: $radius-lg;
   padding: $spacing-md;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
   box-shadow: $shadow-card;
 }
 
 .order-card__head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: $spacing-md;
+  align-items: center;
+  margin-bottom: $spacing-sm;
 }
 
 .order-card__no {
-  font-size: 22px;
+  font-size: 11px;
   color: $color-text-muted;
 }
 
 .order-card__status {
-  font-size: 24px;
+  font-size: 12px;
   color: $color-primary-dark;
+  font-weight: 600;
 }
 
 .order-card__body {
@@ -29,22 +31,29 @@
   align-items: center;
 }
 
+.order-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
 .order-card__cover {
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   border-radius: $radius-md;
-  margin-right: $spacing-md;
+  margin-right: $spacing-sm;
+  flex-shrink: 0;
 }
 
 .order-card__title {
   display: block;
-  font-size: 28px;
+  font-size: 14px;
+  font-weight: 600;
   color: $color-text;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .order-card__price {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: $color-coupon;
 }

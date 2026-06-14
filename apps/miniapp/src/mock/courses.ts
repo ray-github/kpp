@@ -5,6 +5,16 @@ import courseChemistry from '@/assets/courses/course-chemistry.png'
 import courseEnglish from '@/assets/courses/course-english.png'
 import courseDance from '@/assets/courses/course-4.jpg'
 import { CourseCardItem } from '@/mock/home'
+import { CourseReview, getCourseReviewsByKey } from '@/mock/course-reviews'
+
+const COURSE_COORDS: Record<string, { latitude: number; longitude: number }> = {
+  '1': { latitude: 31.19515, longitude: 121.43652 },
+  '2': { latitude: 31.22774, longitude: 121.52201 },
+  '3': { latitude: 31.22859, longitude: 121.44568 },
+  '4': { latitude: 31.22439, longitude: 121.46989 },
+  '5': { latitude: 31.21721, longitude: 121.41789 },
+  '6': { latitude: 31.23786, longitude: 121.44725 },
+}
 
 export interface CourseListItem extends CourseCardItem {
   categoryId: string
@@ -45,6 +55,9 @@ export interface CourseDetailData extends CourseListItem {
   syllabus?: CourseSyllabusRow[]
   reviewCount?: number
   detailImage?: string
+  latitude?: number
+  longitude?: number
+  reviews?: CourseReview[]
 }
 
 export const COURSE_LIST: CourseListItem[] = [
@@ -348,8 +361,13 @@ export function getCourseDetail(id: string): CourseDetailData {
   const course = COURSE_LIST.find((item) => item.id === id)
   if (!course) throw new Error('课程不存在')
   const extra = DETAIL_EXTRA[id] || {}
+  const coords = COURSE_COORDS[id]
+  const reviews = getCourseReviewsByKey(id, course.reviewCount || extra.reviewCount || 0)
   return {
     ...course,
+    latitude: coords?.latitude,
+    longitude: coords?.longitude,
+    reviews,
     categoryName: extra.categoryName || CATEGORY_NAME_MAP[course.categoryId] || '推荐课程',
     city: extra.city || '上海',
     district: extra.district || '浦东新区',

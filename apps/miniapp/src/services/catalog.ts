@@ -10,10 +10,29 @@ import {
   CourseListItem,
   getCourseDetail,
 } from '@/mock/courses'
+import { CourseReview, getCourseReviewsByKey } from '@/mock/course-reviews'
 import { CourseSortKey } from '@/constants/course'
 import banner1 from '@/assets/banners/banner-1.jpg'
 import banner2 from '@/assets/banners/banner-2.jpg'
 import banner3 from '@/assets/banners/banner-3.jpg'
+import courseMath from '@/assets/courses/course-math.png'
+import courseChinese from '@/assets/courses/course-chinese.png'
+import coursePhysics from '@/assets/courses/course-physics.png'
+import courseChemistry from '@/assets/courses/course-chemistry.png'
+import courseEnglish from '@/assets/courses/course-english.png'
+import courseDance from '@/assets/courses/course-4.jpg'
+
+const LOCAL_ASSET_MAP: Record<string, string> = {
+  '/assets/courses/course-math.png': courseMath,
+  '/assets/courses/course-chinese.png': courseChinese,
+  '/assets/courses/course-physics.png': coursePhysics,
+  '/assets/courses/course-chemistry.png': courseChemistry,
+  '/assets/courses/course-english.png': courseEnglish,
+  '/assets/courses/course-4.jpg': courseDance,
+  '/assets/banners/banner-1.jpg': banner1,
+  '/assets/banners/banner-2.jpg': banner2,
+  '/assets/banners/banner-3.jpg': banner3,
+}
 
 export interface CategoryItem {
   id: string
@@ -56,11 +75,29 @@ export interface CourseListQuery {
   pageSize?: number
 }
 
+function normalizeAssetPath(url: string) {
+  const pathOnly = url.replace(/^https?:\/\/[^/]+/i, '').split('?')[0]
+  return pathOnly.startsWith('/') ? pathOnly : `/${pathOnly}`
+}
+
 function resolveAssetUrl(url?: string | null) {
   if (!url) return undefined
-  if (/^https?:\/\//.test(url)) return url
+
+  const normalized = normalizeAssetPath(url)
+  if (LOCAL_ASSET_MAP[normalized]) {
+    return LOCAL_ASSET_MAP[normalized]
+  }
+
+  const fileName = normalized.split('/').pop()
+  if (fileName) {
+    const matched = Object.entries(LOCAL_ASSET_MAP).find(([key]) => key.endsWith(`/${fileName}`))
+    if (matched) return matched[1]
+  }
+
+  if (/^https:\/\//i.test(url)) return url
+
   const origin = BASE_URL.replace(/\/api\/?$/, '')
-  return `${origin}${url.startsWith('/') ? url : `/${url}`}`
+  return `${origin}${normalized}`
 }
 
 function mapCourseItem(
@@ -231,6 +268,29 @@ export async function claimCoupon(couponId: string) {
 }
 
 export type CourseDetail = CourseDetailData
+export type { CourseReview }
+
+export interface CourseReviewsResult {
+  courseId: string
+  courseTitle: string
+  total: number
+  items: CourseReview[]
+}
+
+export async function fetchCourseReviews(courseId: string): Promise<CourseReviewsResult> {
+  if (USE_MOCK) {
+    const course = getCourseDetail(courseId)
+    const items = course.reviews || getCourseReviewsByKey(courseId, course.reviewCount || 0)
+    return {
+      courseId,
+      courseTitle: course.title,
+      total: course.reviewCount || items.length,
+      items,
+    }
+  }
+
+  return request<CourseReviewsResult>({ url: `/catalog/courses/${courseId}/reviews` })
+}
 
 export async function fetchCourseDetail(id: string): Promise<CourseDetail> {
   if (USE_MOCK) {
@@ -276,6 +336,9 @@ export async function fetchCourseDetail(id: string): Promise<CourseDetail> {
     enrollCount: item.enrollCount,
     ageRange: item.ageRange,
     institutionName: item.institutionName,
+    latitude: item.latitude,
+    longitude: item.longitude,
+    reviews: item.reviews || [],
   }
 }
 

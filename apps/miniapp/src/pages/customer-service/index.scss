@@ -4,9 +4,19 @@
   padding-bottom: $spacing-xl;
 }
 
-.customer-service__tip {
-  font-size: 24px;
+.customer-service__loading {
+  display: block;
+  font-size: 13px;
   color: $color-text-muted;
   text-align: center;
-  margin-top: $spacing-lg;
+  padding-top: 40px;
+}
+
+.customer-service__tip {
+  display: block;
+  font-size: 11px;
+  color: $color-text-muted;
+  text-align: center;
+  margin-top: $spacing-md;
+  line-height: 1.6;
 }

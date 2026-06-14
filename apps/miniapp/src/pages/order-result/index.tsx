@@ -17,7 +17,9 @@ export default function OrderResultPage() {
 
   return (
     <View className='order-result page'>
-      <View className='order-result__icon'>✓</View>
+      <View className='order-result__icon'>
+        <Text className='order-result__icon-text'>✓</Text>
+      </View>
       <Text className='order-result__title'>报名成功</Text>
       <Text className='order-result__subtitle'>
         模拟支付已完成，课程已加入你的课程表

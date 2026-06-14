@@ -27,7 +27,7 @@ export default function CustomerServicePage() {
   if (!info) {
     return (
       <View className='customer-service secondary-page page'>
-        <Text>加载中...</Text>
+        <Text className='customer-service__loading'>加载中...</Text>
       </View>
     )
   }

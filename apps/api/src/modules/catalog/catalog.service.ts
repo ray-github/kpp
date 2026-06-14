@@ -41,16 +41,22 @@ export class CatalogService {
       ageRange: course.ageRange,
       institutionName: course.institutionName,
       sortOrder: course.sortOrder,
+      latitude: course.latitude,
+      longitude: course.longitude,
     }
   }
 
   private mapCourseDetail(course: Prisma.CourseGetPayload<{ include: { category: true } }>) {
+    const reviews = Array.isArray(course.reviews) ? course.reviews : []
     return {
       ...this.mapCourseListItem(course),
       detailImageUrl: course.detailImageUrl,
       city: course.city,
       district: course.district,
       address: course.address,
+      latitude: course.latitude,
+      longitude: course.longitude,
+      reviews,
       storeName: course.storeName,
       targetAudience: course.targetAudience,
       brandName: course.brandName,
@@ -150,6 +156,26 @@ export class CatalogService {
     }
 
     return this.mapCourseDetail(course)
+  }
+
+  async getCourseReviews(id: string) {
+    const course = await this.prisma.course.findFirst({
+      where: { id, published: true },
+      select: { reviews: true, reviewCount: true, title: true },
+    })
+
+    if (!course) {
+      throw new NotFoundException('课程不存在')
+    }
+
+    const items = Array.isArray(course.reviews) ? course.reviews : []
+
+    return {
+      courseId: id,
+      courseTitle: course.title,
+      total: course.reviewCount || items.length,
+      items,
+    }
   }
 
   async getBanners() {

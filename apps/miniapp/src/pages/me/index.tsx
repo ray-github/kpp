@@ -1,14 +1,17 @@
 import Taro, { useDidShow } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, Text, ScrollView, Image } from '@tarojs/components'
 import { useUserStore } from '@/stores/user'
 import { ME_QUICK_LINKS, ME_SERVICES } from '@/mock/home'
 import { ORDER_TABS } from '@/constants/order'
 import { fetchOrderSummary } from '@/services/order'
 import { syncTabBarSelected } from '@/utils/tab-bar'
-import { useState } from 'react'
+import { getNavBarMetrics } from '@/utils/nav-bar'
+import defaultAvatar from '@/assets/default-avatar.png'
+import { useMemo, useState } from 'react'
 import './index.scss'
 
 export default function MePage() {
+  const navMetrics = useMemo(() => getNavBarMetrics(), [])
   const user = useUserStore((s) => s.user)
   const loadProfile = useUserStore((s) => s.loadProfile)
   const dailySignIn = useUserStore((s) => s.dailySignIn)
@@ -37,20 +40,32 @@ export default function MePage() {
   return (
     <ScrollView className='me page' scrollY>
       {/* ─── 渐变头部 ─── */}
-      <View className='me__header'>
-        <View className='me__status-bar' />
-        <View className='me__profile'>
-          <View className='me__avatar'>
-            <Text className='me__avatar-text'>
-              {(user?.nickname || 'K').slice(0, 1)}
-            </Text>
-            <View className='me__avatar-ring' />
-          </View>
-          <View className='me__user-info'>
-            <Text className='me__username'>{user?.nickname || 'Kbb518741'}</Text>
-            <Text className='me__phone'>
-              {user?.phone ? user.phone : '点击添加手机号'}
-            </Text>
+      <View
+        className='me__header'
+        style={{ paddingRight: `${navMetrics.capsulePaddingRight}px` }}
+      >
+        <View
+          className='me__capsule-spacer'
+          style={{
+            height: `${navMetrics.statusBarHeight + navMetrics.navContentHeight}px`,
+          }}
+        />
+        <View className='me__profile-wrap'>
+          <View className='me__profile'>
+            <View className='me__avatar'>
+              <Image
+                className='me__avatar-img'
+                src={user?.avatar || defaultAvatar}
+                mode='aspectFill'
+              />
+              <View className='me__avatar-ring' />
+            </View>
+            <View className='me__user-info'>
+              <Text className='me__username'>{user?.nickname || 'Kbb518741'}</Text>
+              <Text className='me__phone'>
+                {user?.phone ? user.phone : '点击添加手机号'}
+              </Text>
+            </View>
           </View>
           <View className='me__settings-btn'>
             <Text className='me__settings-icon'>⚙️</Text>

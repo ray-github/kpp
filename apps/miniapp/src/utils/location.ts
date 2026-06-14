@@ -75,13 +75,50 @@ export function saveLocation(info: LocationInfo) {
   Taro.setStorageSync(STORAGE_KEY, info)
 }
 
+async function ensureLocationAuth() {
+  const { authSetting } = await Taro.getSetting()
+  if (authSetting['scope.userLocation']) return
+
+  try {
+    await Taro.authorize({ scope: 'scope.userLocation' })
+  } catch {
+    const { confirm } = await Taro.showModal({
+      title: '需要位置权限',
+      content: '请允许获取位置信息以展示当前所在区域',
+      confirmText: '去设置',
+    })
+    if (confirm) {
+      await Taro.openSetting()
+    }
+    throw new Error('denied')
+  }
+}
+
+async function getCurrentCoords(fallback: LocationInfo) {
+  try {
+    await ensureLocationAuth()
+    const { latitude, longitude } = await Taro.getLocation({
+      type: 'gcj02',
+      isHighAccuracy: true,
+    })
+    return { latitude, longitude }
+  } catch {
+    return {
+      latitude: fallback.latitude,
+      longitude: fallback.longitude,
+    }
+  }
+}
+
 export async function chooseMapLocation(
   fallback: LocationInfo = DEFAULT_LOCATION,
 ): Promise<LocationInfo> {
   try {
+    const { latitude, longitude } = await getCurrentCoords(fallback)
+
     const picked = await Taro.chooseLocation({
-      latitude: fallback.latitude,
-      longitude: fallback.longitude,
+      latitude,
+      longitude,
     })
 
     const info: LocationInfo = {

@@ -3,23 +3,26 @@
 .orders {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: $color-bg;
 }
 
 .orders__tabs {
   white-space: nowrap;
   background: $color-white;
-  padding: $spacing-sm $spacing-md;
+  padding: $spacing-xs $spacing-md;
+  box-shadow: $shadow-subtle;
+  flex-shrink: 0;
 }
 
 .orders__tab {
   display: inline-flex;
   align-items: center;
-  padding: 12px 24px;
-  margin-right: 12px;
-  border-radius: 32px;
-  background: #f5f5f5;
+  padding: 6px 14px;
+  margin-right: 8px;
+  border-radius: $radius-pill;
+  background: $color-bg;
 }
 
 .orders__tab--active {
@@ -27,7 +30,7 @@
 }
 
 .orders__tab-text {
-  font-size: 24px;
+  font-size: 13px;
   color: $color-text-secondary;
 }
 
@@ -37,20 +40,26 @@
 }
 
 .orders__tab-badge {
-  margin-left: 8px;
-  min-width: 32px;
-  height: 32px;
-  line-height: 32px;
+  margin-left: 4px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
   text-align: center;
-  border-radius: 16px;
+  border-radius: $radius-pill;
   background: $color-coupon;
   color: $color-white;
-  font-size: 20px;
-  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 4px;
 }
 
 .orders__list {
   flex: 1;
-  min-height: 0;
+  height: 0;
   padding: $spacing-md;
+  box-sizing: border-box;
+}
+
+.orders__empty {
+  padding-top: 20px;
 }

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import Taro, { useDidShow, useRouter } from '@tarojs/taro'
+import { getNavBarMetrics } from '@/utils/nav-bar'
 import { View, Text, ScrollView, Input, Image } from '@tarojs/components'
 import {
   COURSE_LIST_CATEGORIES,
@@ -20,6 +21,7 @@ export default function CourseListPage() {
   const initialCategory = router.params.categoryId || 'all'
 
   const [location, setLocation] = useState<LocationInfo>(loadSavedLocation())
+  const [choosingLocation, setChoosingLocation] = useState(false)
   const [keyword, setKeyword] = useState('')
   const [categoryId, setCategoryId] = useState(initialCategory)
   const [sort, setSort] = useState<CourseSortKey>('default')
@@ -59,12 +61,16 @@ export default function CourseListPage() {
   })
 
   const handleChooseLocation = async () => {
+    if (choosingLocation) return
+    setChoosingLocation(true)
     try {
       const next = await chooseMapLocation(location)
       setLocation(next)
       Taro.showToast({ title: next.label, icon: 'none' })
     } catch (error) {
       if (error instanceof Error && error.message === 'cancel') return
+    } finally {
+      setChoosingLocation(false)
     }
   }
 
@@ -89,21 +95,50 @@ export default function CourseListPage() {
   }
 
   const displayCourses = useMemo(() => courses, [courses])
+  const navMetrics = useMemo(() => getNavBarMetrics(), [])
+
+  const handleBack = () => {
+    Taro.navigateBack().catch(() => {
+      Taro.switchTab({ url: '/pages/home/index' })
+    })
+  }
 
   return (
     <View className='course-list page'>
       <View className='course-list__header'>
-        <View className='course-list__location' onClick={handleChooseLocation}>
-          <Text className='course-list__location-icon'>📍</Text>
-          <Text className='course-list__location-text'>{location.label}</Text>
-          <Text className='course-list__location-arrow'>▾</Text>
+        <View
+          className='course-list__status-bar'
+          style={{ height: `${navMetrics.statusBarHeight}px` }}
+        />
+        <View
+          className='course-list__nav-row'
+          style={{
+            height: `${navMetrics.navContentHeight}px`,
+            paddingRight: `${navMetrics.capsulePaddingRight}px`,
+          }}
+        >
+          <View className='course-list__back' onClick={handleBack}>
+            <Text className='course-list__back-icon'>‹</Text>
+          </View>
+          <Text className='course-list__nav-title'>课程</Text>
         </View>
-        <View className='course-list__search'>
+        <View
+          className='course-list__location-row'
+          style={{ paddingRight: `${navMetrics.capsulePaddingRight}px` }}
+        >
+          <View className='course-list__location-wrap' onClick={handleChooseLocation}>
+            <Text className='course-list__location-dot'>●</Text>
+            <Text className='course-list__location-text'>
+              {choosingLocation ? '选点中…' : location.label}
+            </Text>
+          </View>
+        </View>
+        <View className='course-list__search-bar'>
           <Text className='course-list__search-icon'>🔍</Text>
           <Input
             className='course-list__search-input'
             value={keyword}
-            placeholder='搜索课程、讲师'
+            placeholder='搜索课程 / 老师 / 教练'
             placeholderClass='course-list__search-placeholder'
             confirmType='search'
             onInput={(e) => setKeyword(e.detail.value)}

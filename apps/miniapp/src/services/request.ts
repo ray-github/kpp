@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 
 export const USE_MOCK = process.env.TARO_APP_USE_MOCK !== 'false'
 export const BASE_URL = process.env.TARO_APP_API_BASE || 'http://localhost:3000/api'
+export const QQ_MAP_KEY = process.env.TARO_APP_QQ_MAP_KEY || ''
 
 interface RequestOptions {
   url: string

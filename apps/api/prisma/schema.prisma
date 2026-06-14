@@ -108,6 +108,8 @@ model Course {
   city            String?
   district        String?
   address         String?
+  latitude        Float?
+  longitude       Float?
   storeName       String?
   institutionName String?
   targetAudience  String?
@@ -118,6 +120,7 @@ model Course {
   enrollCount     Int?
   sales           Int?
   reviewCount     Int        @default(0)
+  reviews         Json?
   description     String?
   facilityTags    String[]   @default([])
   serviceTags     String[]   @default([])
